@@ -17,7 +17,6 @@ import PatientDetails from '../components/PatientDetails';
 import BloodPressureQuestion from '../components/questions/BloodPressureQuestion';
 //dummy sample data
 import { patients } from '../../data/dummieData';
-import { div } from 'framer-motion/client';
 
 
 // Sample questions
