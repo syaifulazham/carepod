@@ -2,7 +2,7 @@
 'use client'
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
-import { Question, Answer, PatientDetailsInfo } from '../../types/types';
+import { Question, Answer, PatientDetailsInfo, BloodPressure } from '../../types/types';
 import FreeTextQuestion from '../components/questions/FreeTextQuestion';
 import SingleOptionQuestion from '../components/questions/SingleOptionQuestion';
 import MultipleOptionQuestion from '../components/questions/MultipleOptionQuestion';
@@ -13,7 +13,7 @@ import DateQuestion from '../components/questions/DateQuestion';
 import Welcome from '../components/Welcome';
 import Sequences from '../components/Sequences';
 import PatientDetails from '../components/PatientDetails';
-
+import BloodPressureQuestion from '../components/questions/BloodPressureQuestion';
 //dummy sample data
 import { patients } from '../../data/dummieData';
 
@@ -26,7 +26,6 @@ const sampleQuestions: Question[] = [
   { id: 'q2', stage: 'diagnosis', question: 'Apakah gejala kesehatan Anda saat ini?', type: 'multiple_option', options: ['Demam', 'Batuk', 'Sakit Kepala', 'Kelelahan', 'Sesak Napas', 'Mual', 'Muntah', 'Diare', 'Nyeri Dada', 'Tekanan Darah Tinggi', 'Pusing', 'Lemas'] },
   { id: 'q3', stage: 'diagnosis', question: 'Apakah Anda pernah mengalami gejala ini sebelumnya?', type: 'single_option', options: ['Ya', 'Tidak'] },
   { id: 'q5', stage: 'diagnosis', question: 'Apakah Anda memiliki penyakit kronis?', type: 'single_option', options: ['Ya', 'Tidak'] },
-  { id: 'q6', stage: 'diagnosis', question: 'Silakan pilih gejala yang Anda alami saat ini:', type: 'multiple_option', options: ['Demam', 'Batuk', 'Sakit Kepala', 'Kelelahan', 'Sesak Napas'] },
   { id: 'q7', stage: 'diagnosis', question: 'Seberapa parah gejala yang Anda rasakan (1-10)?', type: 'range', min: 1, max: 10 },
   { id: 'q8', stage: 'diagnosis', question: 'Apakah Anda sedang minum obat?', type: 'single_option', options: ['Ya', 'Tidak'] },
   { id: 'q9', stage: 'diagnosis', question: 'Apakah Anda memiliki alergi?', type: 'multiple_option', options: ['Tidak ada', 'Serbuk Sari', 'Makanan', 'Obat', 'Lainnya'] },
@@ -38,9 +37,10 @@ const sampleQuestions: Question[] = [
   { id: 'q15', stage: 'diagnosis', question: 'Apakah Anda memiliki riwayat tekanan darah tinggi?', type: 'single_option', options: ['Ya', 'Tidak'] },
   { id: 'q16', stage: 'diagnosis', question: 'Apakah Anda pernah mengalami sesak napas?', type: 'single_option', options: ['Ya', 'Tidak'] },
   { id: 'q17', stage: 'diagnosis', question: 'Apakah Anda mengalami pembengkakan di bagian tubuh tertentu?', type: 'single_option', options: ['Ya', 'Tidak'] },
-  { id: 'q18', stage: 'diagnosis', question: 'Berapa suhu tubuh Anda saat ini (dalam °C)?', type: 'number' },
   { id: 'q19', stage: 'diagnosis', question: 'Apakah Anda merasa pusing?', type: 'single_option', options: ['Ya', 'Tidak'] },
-  { id: 'q20', stage: 'diagnosis', question: 'Apakah Anda merasa lemas atau kehilangan energi?', type: 'single_option', options: ['Ya', 'Tidak'] }
+  { id: 'q20', stage: 'diagnosis', question: 'Apakah Anda merasa lemas atau kehilangan energi?', type: 'single_option', options: ['Ya', 'Tidak'] },
+  { id: 'q18', stage: 'self-check', question: 'Berapa suhu tubuh Anda saat ini (dalam °C)?', type: 'number' },
+  { id: 'q19', stage: 'self-check', question: 'Tekanan Darah dan Nadi', type: 'blood_pressure' },
 ];
 
 
@@ -79,7 +79,7 @@ export default function SequentialQuestionnaire() {
 
   
 
-  const handleAnswer = (questionId: string, value: string | string[] | number | boolean) => {
+  const handleAnswer = (questionId: string, value: string | string[] | number | boolean | BloodPressure) => {
     setAnswers((prevAnswers) => {
       const existingAnswerIndex = prevAnswers.findIndex((a) => a.questionId === questionId);
       const updatedAnswers = [...prevAnswers];
@@ -196,6 +196,12 @@ export default function SequentialQuestionnaire() {
                       return (
                         <DateQuestion
                           question={currentQuestion}
+                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                        />
+                      );
+                    case 'blood_pressure':
+                      return (
+                        <BloodPressureQuestion
                           onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
                         />
                       );

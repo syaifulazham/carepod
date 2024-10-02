@@ -9,7 +9,8 @@ export type QuestionType =
   | 'time'
   | 'boolean'
   | 'welcome'
-  | 'profile';
+  | 'profile'
+  | 'blood_pressure';
 
 export interface Question {
   id: string;
@@ -23,7 +24,7 @@ export interface Question {
 
 export interface Answer {
   questionId: string;
-  value: string | string[] | number | boolean | null;
+  value: string | string[] | number | boolean | null | BloodPressure;
 }
 
 export interface Address {
@@ -32,6 +33,12 @@ export interface Address {
   state: string;
   zipCode: string;
   country: string;
+}
+
+export interface BloodPressure {
+  systolic: number;
+  diastolic: number;
+  pulse: number;
 }
 
 export interface PatientDetailsInfo{

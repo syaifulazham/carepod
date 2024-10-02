@@ -20,7 +20,7 @@ export default function Sequences({currentStage}: SequencesProps){
                 </div>
                 <div className="flex flex-row gap-4">
                     <div className={`w-[20px] h-[20px] rounded-full text-center ${currentStage === 'diagnosis' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`} >4</div>
-                    <span className={`${currentStage === 'diagnosis' ? 'text-blue-500' : 'text-gray-500'}`}>Diagnosis</span>
+                    <span className={`${currentStage === 'diagnosis' ? 'text-blue-500' : 'text-gray-500'}`}>Diagnosa</span>
                 </div>
                 <div className="flex flex-row gap-4">
                     <div className={`w-[20px] h-[20px] rounded-full text-center ${currentStage === 'self-check' ? 'bg-blue-500 text-white' : 'bg-gray-300'}`} >5</div>
