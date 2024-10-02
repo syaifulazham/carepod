@@ -14,9 +14,6 @@ import Welcome from '../components/Welcome';
 import Sequences from '../components/Sequences';
 import PatientDetails from '../components/PatientDetails';
 
-import Image from 'next/image';
-import Logo from '../lib/images/carepod.png';
-
 //dummy sample data
 import { patients } from '../../data/dummieData';
 
@@ -82,7 +79,7 @@ export default function SequentialQuestionnaire() {
 
   
 
-  const handleAnswer = (questionId: string, value: any) => {
+  const handleAnswer = (questionId: string, value: string | string[] | number | boolean) => {
     setAnswers((prevAnswers) => {
       const existingAnswerIndex = prevAnswers.findIndex((a) => a.questionId === questionId);
       const updatedAnswers = [...prevAnswers];

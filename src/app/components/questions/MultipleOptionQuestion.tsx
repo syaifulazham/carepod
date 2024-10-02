@@ -11,7 +11,7 @@ export default function MultipleOptionQuestion({ question, onAnswer }: MultipleO
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   const handleToggle = (option: string) => {
-    let updatedOptions = selectedOptions.includes(option)
+    const updatedOptions = selectedOptions.includes(option)
       ? selectedOptions.filter((o) => o !== option) // Deselect the option if already selected
       : [...selectedOptions, option]; // Add the option if not selected
 
