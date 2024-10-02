@@ -1,6 +1,7 @@
 // src/app/questionnaire/page.tsx
 'use client'
 import { useState } from 'react';
+import NavBar from '../components/NavBar';
 import { motion, AnimatePresence } from 'framer-motion'; // Import Framer Motion
 import { Question, Answer, PatientDetailsInfo, BloodPressure } from '../../types/types';
 import FreeTextQuestion from '../components/questions/FreeTextQuestion';
@@ -16,6 +17,7 @@ import PatientDetails from '../components/PatientDetails';
 import BloodPressureQuestion from '../components/questions/BloodPressureQuestion';
 //dummy sample data
 import { patients } from '../../data/dummieData';
+import { div } from 'framer-motion/client';
 
 
 // Sample questions
@@ -77,7 +79,7 @@ export default function SequentialQuestionnaire() {
 
   const currentQuestion = sampleQuestions[currentStep];
 
-  
+
 
   const handleAnswer = (questionId: string, value: string | string[] | number | boolean | BloodPressure) => {
     setAnswers((prevAnswers) => {
@@ -121,127 +123,131 @@ export default function SequentialQuestionnaire() {
   };
 
   return (
-    <div className="flex flex-col w-[50vw] h-screen md:flex-row">
-    <Sequences currentStage={currentQuestion.stage} />
-    <div className="flex flex-col items-center justify-center p-20 h-[90vh] bg-white w-full rounded-lg md:w-[40vw]">
-      
-      <div className="w-full max-w-md p-6 rounded-lg shadow-lg md:w-[40vw] w-[90vw]">
-        
+    <div className='flex flex-col w-full h-screen items-center'>
+      <NavBar />
+      <div className="flex flex-col w-[50vw] h-screen md:flex-row">
 
-        {/* AnimatePresence ensures only one question is mounted at a time */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={variants}
-            transition={{ duration: 0.5 }}
-          >
-            {currentQuestion && (
-              <div className="mb-4">
-                {(() => {
-                  switch (currentQuestion.type) {
-                    case 'welcome':
-                      return (
-                        <Welcome />
-                      );
-                    case 'profile':
-                        return (
-                          <PatientDetails patientDetails={patientDetails || defaultPatientDetails} />
-                        );
-                    case 'free_text':
-                      return (
-                        <FreeTextQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'single_option':
-                      return (
-                        <SingleOptionQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'multiple_option':
-                      return (
-                        <MultipleOptionQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'range':
-                      return (
-                        <RangeQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'number':
-                      return (
-                        <NumberQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'boolean':
-                      return (
-                        <BooleanQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'date':
-                      return (
-                        <DateQuestion
-                          question={currentQuestion}
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    case 'blood_pressure':
-                      return (
-                        <BloodPressureQuestion
-                          onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
-                        />
-                      );
-                    default:
-                      return null;
-                  }
-                })()}
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <Sequences currentStage={currentQuestion.stage} />
+        <div className="flex flex-col items-center justify-center p-20 h-[90vh] bg-white w-full rounded-lg md:w-[40vw]">
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between mt-4">
-          <button
-            onClick={handleBack}
-            disabled={currentStep === 0}
-            className={`px-4 py-2 bg-blue-500 text-white rounded-md ${currentStep === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
-          >
-            Kembali
-          </button>
+          <div className="w-full max-w-md p-6 rounded-lg shadow-lg md:w-[40vw] w-[90vw]">
 
-          {currentStep < sampleQuestions.length - 1 ? (
-            <button
-              onClick={handleNext}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Selanjutnya
-            </button>
-          ) : (
-            <button
-              onClick={handleSubmit}
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-            >
-              Selesai
-            </button>
-          )}
+
+            {/* AnimatePresence ensures only one question is mounted at a time */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={variants}
+                transition={{ duration: 0.5 }}
+              >
+                {currentQuestion && (
+                  <div className="mb-4">
+                    {(() => {
+                      switch (currentQuestion.type) {
+                        case 'welcome':
+                          return (
+                            <Welcome />
+                          );
+                        case 'profile':
+                          return (
+                            <PatientDetails patientDetails={patientDetails || defaultPatientDetails} />
+                          );
+                        case 'free_text':
+                          return (
+                            <FreeTextQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'single_option':
+                          return (
+                            <SingleOptionQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'multiple_option':
+                          return (
+                            <MultipleOptionQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'range':
+                          return (
+                            <RangeQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'number':
+                          return (
+                            <NumberQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'boolean':
+                          return (
+                            <BooleanQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'date':
+                          return (
+                            <DateQuestion
+                              question={currentQuestion}
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        case 'blood_pressure':
+                          return (
+                            <BloodPressureQuestion
+                              onAnswer={(value) => handleAnswer(currentQuestion.id, value)}
+                            />
+                          );
+                        default:
+                          return null;
+                      }
+                    })()}
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={handleBack}
+                disabled={currentStep === 0}
+                className={`px-4 py-2 bg-blue-500 text-white rounded-md ${currentStep === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+              >
+                Kembali
+              </button>
+
+              {currentStep < sampleQuestions.length - 1 ? (
+                <button
+                  onClick={handleNext}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                  Selanjutnya
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                >
+                  Selesai
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
