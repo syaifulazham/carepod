@@ -7,7 +7,7 @@ export default function NavBar() {
             <div>
                 <Image src={Logo} alt="Logo" height={45} width={45} />
             </div>
-            <h1 className="text-white text-2xl font-bold logo-font">Care<span>Pod</span></h1>
+            <h1 className="text-white text-2xl font-bold logo-font">Care<span className="pod">Pod</span><span className="lab">Lab</span></h1>
 
         </div>
     );
