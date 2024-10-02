@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #1F222A;
+  --foreground: #2e2e2e;
+  --primary: #00B5BE;
+  --secondary: #FFAD01;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1F222A;
+    --foreground: #2e2e2e;
+    --primary: #00B5BE;
+    --secondary: #FFAD01;
+  }
+}
+
+.logo-font{
+  font-family: 'Fugaz One', sans-serif;
+  
+  letter-spacing: 3px;
+  color: #eb2560;
+}
+
+.logo-font > span{
+  color: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Roboto', sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
