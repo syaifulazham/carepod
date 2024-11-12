@@ -46,10 +46,10 @@ const sampleQuestions: Question[] = [
 
 const PemeriksaanUmum = () => {
   const [step, setStep] = useState(0);
-  //const [questionnaireResponses, setQuestionnaireResponses] = useState({});
+  const [questionnaireResponses, setQuestionnaireResponses] = useState({});
 
   const handleQuestionnaireComplete = (responses: { [key: string]: string | string[] }) => {
-    //setQuestionnaireResponses(responses);
+    setQuestionnaireResponses(responses);
     setStep(3);  // Proceed to the next step after questionnaire completion
   };
   const [selectedPatient, setSelectedPatient] = useState<PatientDetailsInfo | null>(null);
@@ -338,9 +338,11 @@ const PemeriksaanUmum = () => {
           <Button variant="outline" onClick={() => setStep(2)}>
             Kembali
           </Button>
-          <Button onClick={() => setStep(4)} variant="outline">
-            Mulai Konsultasi <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          {Object.values(questionnaireResponses).length > 0 && (
+            <Button onClick={() => setStep(4)} variant="outline">
+              Mulai Konsultasi <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          )}
         </div>
       </CardContent>
     </div>
