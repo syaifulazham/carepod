@@ -15,8 +15,7 @@ import {
   Timer,
   CheckCircle,
   AlertCircle,
-  ArrowRight,
-  Link
+  ArrowRight
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { patients } from '@/data/dummieData';
@@ -24,7 +23,6 @@ import { PatientDetailsInfo, Question } from '@/types/types';
 
 import KioskLabel from '@/app/components/KioskLabel';
 
-import { Fingerprint } from 'lucide-react';
 import { MdFingerprint } from "react-icons/md";
 
 const sampleQuestions: Question[] = [
@@ -48,10 +46,10 @@ const sampleQuestions: Question[] = [
 
 const PemeriksaanUmum = () => {
   const [step, setStep] = useState(0);
-  const [questionnaireResponses, setQuestionnaireResponses] = useState({});
+  //const [questionnaireResponses, setQuestionnaireResponses] = useState({});
 
   const handleQuestionnaireComplete = (responses: { [key: string]: string | string[] }) => {
-    setQuestionnaireResponses(responses);
+    //setQuestionnaireResponses(responses);
     setStep(3);  // Proceed to the next step after questionnaire completion
   };
   const [selectedPatient, setSelectedPatient] = useState<PatientDetailsInfo | null>(null);
