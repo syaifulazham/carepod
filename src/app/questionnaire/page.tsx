@@ -15,7 +15,9 @@ import Welcome from '../components/Welcome';
 import Sequences from '../components/Sequences';
 import PatientDetails from '../components/PatientDetails';
 import BloodPressureQuestion from '../components/questions/BloodPressureQuestion';
+import PemeriksaanUmum from '../components/Console';
 //dummy sample data
+
 import { patients } from '../../data/dummieData';
 
 

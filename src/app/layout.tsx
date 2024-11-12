@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`bg-gray-50 antialiased`}
       >
         <div className="flex flex-col w-full items-center px-[10vw]">
           
